@@ -3,11 +3,14 @@ angular.module( 'ngBoilerplate', [
   'templates-common',
   'ngBoilerplate.home',
   'ngBoilerplate.about',
-  'ui.router'
+  'ui.router',
+  'satellizer',
+  'authJS'
 ])
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
+.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $authProvider ) {
   $urlRouterProvider.otherwise( '/home' );
+  $authProvider.loginUrl = './Hermes/auth/auth.php';
 })
 
 .run( function run () {

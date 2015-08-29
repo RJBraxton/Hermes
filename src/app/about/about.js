@@ -2,7 +2,7 @@ angular.module( 'ngBoilerplate.about', [
   'ui.router',
   'placeholders',
   'ui.bootstrap'
-])
+  ])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'about', {
@@ -17,13 +17,20 @@ angular.module( 'ngBoilerplate.about', [
   });
 })
 
-.controller( 'AboutCtrl', function AboutCtrl( $scope ) {
-  // This is simple a demo for UI Boostrap.
-  $scope.dropdownDemoItems = [
-    "The first choice!",
-    "And another choice for you.",
-    "but wait! A third!"
-  ];
+.controller( 'AboutCtrl', function AboutCtrl( $scope, $auth ) {
+
+  $scope.checkLocal = function() {
+    console.log($auth.getPayload());
+  };
+
+  $scope.authenticate = function() {
+    $auth.login({
+      email: $scope.email,
+      password: $scope.password
+    }).then(function(response) { 
+      $auth.setToken(response);
+    });
+  };
 })
 
 ;
