@@ -13,23 +13,29 @@ angular.module( 'ngBoilerplate.about', [
         templateUrl: 'about/about.tpl.html'
       }
     },
-    data:{ pageTitle: 'What is It?' },
-    userOnly : true
+    data:{ pageTitle: 'What is It?' }
   });
 })
 
-.controller( 'AboutCtrl', function AboutCtrl( $scope, $auth ) {
+.controller( 'AboutCtrl', function AboutCtrl( $scope, authJS, $http ) {
+
+  $scope.phpTest = function() {
+    $http.post('../secrets/config.inc.php', {})
+    .then(function(res) {
+      $scope.phpRes = res.data;
+    }, function(error) {
+      $scope.phpRes = error;
+    });
+  };
 
   $scope.checkLocal = function() {
-    console.log($auth.getPayload());
+    console.log(authJS.isAuthenticated());
   };
 
   $scope.authenticate = function() {
-    $auth.login({
+    authJS.login({
       email: $scope.email,
       password: $scope.password
-    }).then(function(response) { 
-      $auth.setToken(response);
     });
   };
 })

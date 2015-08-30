@@ -10,13 +10,15 @@ angular.module( 'ngBoilerplate', [
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $authProvider ) {
   $urlRouterProvider.otherwise( '/home' );
-  $authProvider.loginUrl = './Hermes/auth/auth.php';
+  $authProvider.loginUrl = './Hermes/auth/authLogin.php';
+  $authProvider.signupUrl = './Hermes/auth/authSignup.php';
+
 })
 
 .run( function run () {
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, $state ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, $state, authJS ) {
 
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
@@ -28,9 +30,10 @@ angular.module( 'ngBoilerplate', [
     // Add usability for admin-only pages
     if (toState.userOnly) {
       console.log("You are now in the " + toState.url + " state. This is for authenticated users only.");
-      if (true) { //If they are authenticated
-        //Let em in!
+      if (authJS.isAuthenticated()) { //If they are authenticated
+        console.log('You are authenticated and logged in!');
       } else{
+        //Not authenticated
         $state.go('home');
       }
       //Here we put some fancy authentication magic. From authJS.

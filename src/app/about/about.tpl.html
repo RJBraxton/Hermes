@@ -1,14 +1,34 @@
 <div class="row">
-  <div class="col-md-4 col-md-offset-4">
+  <div class="col-md-4 col-md-offset-2">
     <div class="well">
-    <p>Email: {{email}}</p>
-    <p>Password: {{password}}</p>
+      <p>Login</p>
       <form action="">
         <p><input type="text" class="form-control" ng-model="email" placeholder="Email"></p>
         <p><input type="text" class="form-control" ng-model="password" placeholder="Password"></p>
       </form>
-      <button class="btn" ng-click="authenticate()">Login</button>
+      <button class="btn btn-success" ng-click="authenticate()">Login</button>
       <button class="btn" ng-click="checkLocal()">Check Local</button>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="well">
+      <p>Not a member? Register!</p>
+      <form action="">
+        <p><input type="text" class="form-control" ng-model="registerEmail" placeholder="Email"></p>
+        <p><input type="text" class="form-control" ng-model="registerPassword" placeholder="Password"></p>
+      </form>
+      <button class="btn btn-success">Submit</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-4 col-md-offset-8">
+    <div class="well">
+      <p>This is just to test PHP connections.</p>
+      <p><button class="btn" ng-click="phpTest()">Test</button></p>
+      <p>{{phpRes}}</p>
     </div>
   </div>
 </div>
