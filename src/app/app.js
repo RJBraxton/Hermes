@@ -2,7 +2,7 @@ angular.module( 'ngBoilerplate', [
   'templates-app',
   'templates-common',
   'ngBoilerplate.home',
-  'ngBoilerplate.about',
+  'ngBoilerplate.login',
   'ui.router',
   'satellizer',
   'authJS'
@@ -22,12 +22,11 @@ angular.module( 'ngBoilerplate', [
 
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
-      $scope.pageTitle = toState.data.pageTitle + ' | ngBoilerplate' ;
+      $scope.pageTitle = toState.data.pageTitle + ' | Hermes' ;
     }
 
-    // This manages redirecting for our pages that need authentication.
+    // This manages redirecting for our pages that require logging in.
     // To activate this, give the State a property of userOnly: true
-    // Add usability for admin-only pages
     if (toState.userOnly) {
       console.log("You are now in the " + toState.url + " state. This is for authenticated users only.");
       if (authJS.isAuthenticated()) { //If they are authenticated
@@ -36,10 +35,8 @@ angular.module( 'ngBoilerplate', [
         //Not authenticated
         $state.go('home');
       }
-      //Here we put some fancy authentication magic. From authJS.
     }
   });
-})
 
-;
+});
 

@@ -1,14 +1,12 @@
 angular.module( 'authJS', [] )
 
 //Add documentation here when things are mostly done....
-.factory( 'authJS', function($auth) {
+.factory( 'authJS', function($auth, $state) {
 	var _factory = {
 		login: function(email, password) {
 			return $auth.login({
 				email: email,
 				password: password
-			}).then(function(response) {
-				$auth.setToken(response);
 			});
 		},
 		signup: function() {
@@ -18,7 +16,7 @@ angular.module( 'authJS', [] )
 
 		},
 		logout: function() {
-
+			$auth.logout();
 		},
 		isAuthenticated: function() {
 			//NOTE: This only checks if we have an unexpired token, not if it is a valid one.
