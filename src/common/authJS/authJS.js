@@ -16,7 +16,7 @@ angular.module( 'authJS', [] )
 
 		},
 		logout: function() {
-			$auth.logout();
+			return $auth.logout();
 		},
 		isAuthenticated: function() {
 			//NOTE: This only checks if we have an unexpired token, not if it is a valid one.

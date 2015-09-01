@@ -24,6 +24,7 @@ if ($result) {
 		//If email and password match
 		$token = array(
 			"email" => $email,
+			"username" => $result->username,
 			"exp" => time() + (60 * 60),
 			"iat" => time()
 			);

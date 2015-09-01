@@ -19,6 +19,10 @@ angular.module( 'ngBoilerplate.login', [
 
 .controller( 'AboutCtrl', function AboutCtrl( $scope, authJS, $http, $state ) {
 
+//Manual routing. Shouldn't be viewing this page if you're logged in.
+if ($scope.$parent.loggedIn) {
+  $state.go('home');
+}
 
   // Is it possible to think about moving this into the factory?
   // And for some reason authJS.login() refuses to just take two params, and only works with an object???
@@ -28,7 +32,8 @@ angular.module( 'ngBoilerplate.login', [
       password: $scope.password
     }).then(function(response) {
         authJS.setToken(response);
-        $scope.errorMsg = "Successfully logged in!";
+        $scope.$parent.user = authJS.getPayload();
+        $state.go('home');
       }, function(error) {
         $scope.errorMsg = "Error: " + error.data;
       });
