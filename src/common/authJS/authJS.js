@@ -9,8 +9,22 @@ angular.module( 'authJS', [] )
 				password: password
 			});
 		},
-		signup: function() {
-
+		signup: function(username, email, password) {
+			return $auth.signup({
+				username: username,
+				email: email,
+				password: password
+			}).then(function(res) {
+				res = JSON.parse(res.data);
+				if (!res) {
+					return [false, "This username or password is already taken."];
+				}
+				else {
+					return [true, "Account successfully created!"];
+				}
+			}, function(error) {
+				return [false, error];
+			});
 		},
 		authenticate: function() {
 

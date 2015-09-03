@@ -7,17 +7,19 @@
         <p><input type="text" class="form-control" ng-model="email" placeholder="Email"></p>
         <p><input type="password" class="form-control" ng-model="password" placeholder="Password"></p>
       </form>
-      <button class="btn btn-success" ng-click="login()">Login</button>
+      <button class="btn btn-success" ng-click="login(email, password)">Login</button>
     </div>
   </div>
   <div class="col-md-4">
     <div class="well">
       <p>Not a member? Register!</p>
       <form action="">
+        <p><input type="text" class="form-control" ng-model="registerUsername" placeholder="Username"></p>
         <p><input type="text" class="form-control" ng-model="registerEmail" placeholder="Email"></p>
         <p><input type="password" class="form-control" ng-model="registerPassword" placeholder="Password"></p>
       </form>
-      <button class="btn btn-success">Submit</button>
+      <button class="btn btn-success" ng-click="signup()">Register!</button>
+      <p>{{signupMessage}}</p>
     </div>
   </div>
 </div>
