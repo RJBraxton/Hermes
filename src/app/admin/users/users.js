@@ -44,6 +44,15 @@ angular.module( 'ngBoilerplate.adminUsers', [
  * And of course we define a controller for our route.
  */
 .controller( 'UsersCtrl', function UsersCtrl( $scope ) {
+
+  $scope.users = [{
+    username: "fzap",
+    email: 'frank@zappata.com',
+    isAdmin: false,
+    signup: 'May',
+    lastLogin: 'Nov'
+  }];
+
 })
 
 ;

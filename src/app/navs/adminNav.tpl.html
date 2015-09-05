@@ -1,4 +1,4 @@
-<div class="navbar navbar-default">
+<div class="navbar navbar-default ng-cloak">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" ng-init="menuCollapsed = true"
     ng-click="menuCollapsed = ! menuCollapsed">
@@ -8,7 +8,7 @@
     <span class="icon-bar"></span>
   </button>
   <div class="navbar-brand" ui-sref-active="active">
-    <a href ui-sref="overview">
+    <a href ui-sref="adminOverview">
       <i class="fa fa-home"></i>
       Hermes (admin)
     </a>
@@ -17,22 +17,22 @@
 <div class="collapse navbar-collapse" collapse="menuCollapsed">
   <ul class="nav navbar-nav">
    <li>
-    <a href ui-sref-active="active" ui-sref="adminOverview">
+    <a href ui-sref="adminOverview">
       Overview
     </a>
   </li>
   <li>
-    <a href ui-sref-active="active" ui-sref="adminPosts">
+    <a href ui-sref="adminPosts">
       Posts
     </a>
   </li>
   <li>
-    <a href ui-sref-active="active" ui-sref="adminPages">
+    <a href ui-sref="adminPages">
       Pages
     </a>
   </li>
   <li>
-    <a href ui-sref-active="active" ui-sref="adminUsers">
+    <a href ui-sref="adminUsers">
       Users
     </a>
   </li>
