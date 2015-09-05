@@ -3,7 +3,10 @@ angular.module( 'ngBoilerplate', [
   'templates-common',
   'ngBoilerplate.home',
   'ngBoilerplate.login',
-  'ngBoilerplate.overview',
+  'ngBoilerplate.adminOverview',
+  'ngBoilerplate.adminUsers',
+  'ngBoilerplate.adminPosts',
+  'ngBoilerplate.adminPages',
   'ui.router',
   'satellizer',
   'authJS'

@@ -4,8 +4,8 @@
  * build process will exclude all `.spec.js` files from the build
  * automatically.
  */
-describe( 'overview section', function() {
-  beforeEach( module( 'ngBoilerplate.adminOverview' ) );
+describe( 'pagges section', function() {
+  beforeEach( module( 'ngBoilerplate.adminPages' ) );
 
   it( 'should have a dummy test', inject( function() {
     expect( true ).toBeTruthy();
