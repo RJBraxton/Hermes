@@ -1,0 +1,61 @@
+<div class="navbar navbar-default">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" ng-init="menuCollapsed = true"
+    ng-click="menuCollapsed = ! menuCollapsed">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <div class="navbar-brand" ui-sref-active="active">
+    <a href ui-sref="overview">
+      <i class="fa fa-home"></i>
+      Hermes (admin)
+    </a>
+  </div>
+</div>
+<div class="collapse navbar-collapse" collapse="menuCollapsed">
+  <ul class="nav navbar-nav">
+   <li>
+    <a href ui-sref-active="active" ui-sref="overview">
+      Overview
+    </a>
+  </li>
+  <li>
+    <a href ui-sref-active="active" ui-sref="overview">
+      Posts
+    </a>
+  </li>
+  <li>
+    <a href ui-sref-active="active" ui-sref="overview">
+      Pages
+    </a>
+  </li>
+  <li>
+    <a href ui-sref-active="active" ui-sref="overview">
+      Users
+    </a>
+  </li>
+</ul>
+<ul class="nav navbar-nav navbar-right" ng-if="!auth.isAuthenticated()">
+  <li ui-sref-active="active">
+    <a href ui-sref="admin">
+      Login/Register
+    </a>
+  </li>
+</ul>
+<ul class="nav navbar-nav navbar-right" ng-if="auth.isAuthenticated()">
+  <li>
+    <a  href ui-sref="home">
+      Logged in as: {{user.username}}
+    </a>
+  </li>
+  <li>
+    <a href="" ng-click="logout()">
+      <i class="fa fa-comments"></i>
+      Logout
+    </a>
+  </li>
+</ul>
+</div>
+</div>

@@ -9,15 +9,19 @@ angular.module( 'ngBoilerplate.login', [
     url: '/login',
     views: {
       "main": {
-        controller: 'AboutCtrl',
+        controller: 'LoginCtrl',
         templateUrl: 'login/login.tpl.html'
+      },
+      "nav": {
+        controller: 'LoginCtrl',
+        templateUrl: 'navs/mainNav.tpl.html'
       }
     },
     data:{ pageTitle: 'Login' }
   });
 })
 
-.controller( 'AboutCtrl', function AboutCtrl( $scope, authJS, $http, $state ) {
+.controller( 'LoginCtrl', function LoginCtrl( $scope, authJS, $http, $state ) {
 
 //Manual routing. Shouldn't be viewing this page if you're logged in.
 if ($scope.$parent.loggedIn) {

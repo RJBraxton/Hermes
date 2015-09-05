@@ -27,10 +27,14 @@ angular.module( 'authJS', [] )
 			});
 		},
 		authenticate: function() {
-
+			
 		},
 		logout: function() {
-			return $auth.logout();
+			return $auth.logout().then(function() {
+				$state.go('home');
+			}, function() {
+
+			});
 		},
 		isAuthenticated: function() {
 			//NOTE: This only checks if we have an unexpired token, not if it is a valid one.

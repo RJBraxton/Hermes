@@ -20,11 +20,13 @@ $result = $result->fetch_object();
 
 if ($result) {  
 	//If the email is in the DB.
-	if ( hash_equals($result->password, crypt($password, $result->password)) ) {
+	if ( hash_equals($result->password, crypt($password, $result->salt)) ) {
 		//If email and password match
+		//Now we are constructing the JWT.
 		$token = array(
 			"email" => $email,
 			"username" => $result->username,
+			"isAdmin" => ($result->isAdmin ? true : false),
 			"exp" => time() + (60 * 60),
 			"iat" => time()
 			);

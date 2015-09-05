@@ -3,6 +3,7 @@ angular.module( 'ngBoilerplate', [
   'templates-common',
   'ngBoilerplate.home',
   'ngBoilerplate.login',
+  'ngBoilerplate.overview',
   'ui.router',
   'satellizer',
   'authJS'
