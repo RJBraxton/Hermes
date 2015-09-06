@@ -43,15 +43,12 @@ angular.module( 'ngBoilerplate.adminUsers', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'UsersCtrl', function UsersCtrl( $scope ) {
+.controller( 'UsersCtrl', function UsersCtrl( $scope, dbConnect ) {
 
-  $scope.users = [{
-    username: "fzap",
-    email: 'frank@zappata.com',
-    isAdmin: false,
-    signup: 'May',
-    lastLogin: 'Nov'
-  }];
+  dbConnect.getUsers().then(function(res) {
+    $scope.users = res;
+  });
+
 
 })
 

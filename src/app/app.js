@@ -9,7 +9,8 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.adminPages',
   'ui.router',
   'satellizer',
-  'authJS'
+  'authJS',
+  'dbConnect'
   ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $authProvider ) {
