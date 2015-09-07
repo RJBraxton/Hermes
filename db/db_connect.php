@@ -5,6 +5,7 @@ include '../secrets/config.inc.php';
 $params = json_decode(file_get_contents('php://input'),true);
 $method = $params['method'];
 $options = $params['options'];
+$id = $params['id'];
 
 if ($method === 'getUsers') {
 	$query = "SELECT email, username, id, isAdmin, signupDate FROM Users";
@@ -22,7 +23,7 @@ if ($method === 'getUsers') {
 	}
 }
 
-if ($method === 'editUser' && $params['id']) {
+if ($method === 'editUser' && $id) {
 
 	foreach ($options as $key => $value) {
 		$options[$key] = "'$value'";
@@ -43,7 +44,7 @@ if ($method === 'editUser' && $params['id']) {
 		//THIS ONE IS SPECIAL
 		$queryOptions .= ( $queryOptions ? ", " : '' ) . "email = " . $options['email'];
 	}
-	$query = $query . $queryOptions . " WHERE id = " . $params['id'];
+	$query = $query . $queryOptions . " WHERE id = " . $id;
 	
 	if ($queryOptions) {
 		if ($result = $conn->query($query)) {
@@ -59,8 +60,8 @@ if ($method === 'editUser' && $params['id']) {
 	}
 }
 
-if ($method === 'removeUser' && $params['id']) {
-	$query = "DELETE from Users WHERE id = " . $params['id'];
+if ($method === 'removeUser' && $id) {
+	$query = "DELETE from Users WHERE id = " . $id;
 	if ($result = $conn->query($query)) {
 			echo var_dump($result);
 		}
@@ -83,6 +84,52 @@ if ($method === 'getPosts') {
 	} else {
 		http_response_code(404);
 		echo "Failed to contact the database.";
+	}
+}
+
+if ($method === 'getPost') {
+	$query = "SELECT * from Posts where postId = " . $id;
+	if ($result = $conn->query($query)) {
+		$users = array();
+		while($row = $result->fetch_assoc())
+		{
+			array_push($users, $row);
+		}
+
+		echo json_encode($users);
+	} else {
+		http_response_code(404);
+		echo "Failed to contact the database.";
+	}
+}
+
+if ($method === 'editPost' && $id) {
+
+	foreach ($options as $key => $value) {
+		$options[$key] = "'$value'";
+	}
+
+	$query = "UPDATE Posts SET ";
+	$queryOptions = "";
+	if (!is_null($options['body'])) {
+		$queryOptions .= "body = " . $options['body'];
+	}
+	if (!is_null($options['title'])) {
+		$queryOptions .= ( $queryOptions ? ", " : '' ) . "title = " . $options['title'];
+	}
+	$query = $query . $queryOptions . " WHERE postId = " . $id;
+	
+	if ($queryOptions) {
+		if ($result = $conn->query($query)) {
+			echo ($result);
+		}
+		else {
+			http_response_code(404);
+			echo "Failed to contact the database.";
+		}
+	} else {
+		http_response_code(404);
+		echo "No options provided.";
 	}
 }
 

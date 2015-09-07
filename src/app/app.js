@@ -6,6 +6,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.adminOverview',
   'ngBoilerplate.adminUsers',
   'ngBoilerplate.adminPosts',
+  'ngBoilerplate.adminEditPost',
   'ngBoilerplate.adminPages',
   'ui.router',
   'satellizer',

@@ -69,7 +69,10 @@ module.exports = {
       'vendor/angular-ui-utils/modules/route/route.js',
       'vendor/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
       'vendor/satellizer/satellizer.js',
-      'vendor/angular-sanitize/angular-sanitize.js'
+      'vendor/angular-sanitize/angular-sanitize.js',
+      'vendor/textAngular/dist/textAngular-rangy.min.js',
+      'vendor/textAngular/dist/textAngular-sanitize.min.js',  
+      'vendor/textAngular/dist/textAngular.min.js'
     ],
     css: [
     ],

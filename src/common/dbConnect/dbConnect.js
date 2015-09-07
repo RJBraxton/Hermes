@@ -28,6 +28,7 @@ angular.module( 'dbConnect', [] )
 			});
 		},
 		getPosts: function() {
+			//Will later implement limits, etc for pagination
 			return $http.post('../db/db_connect.php', {'method': 'getPosts'}).
 			then(function(res) {
 				console.log(res.data);
@@ -36,8 +37,26 @@ angular.module( 'dbConnect', [] )
 				console.log("Error! %o", err);
 			});
 		},
-		editPost: function() {
-
+		getPost: function(id) {
+			if (id) {
+				return $http.post('../db/db_connect.php', {'method': 'getPost', 'id': id}).
+				then(function(res) {
+					return res.data[0];
+				}, function(err) {
+					console.log("Error! %o", err);
+				});
+			}
+			else {
+				console.log("No id provided.");
+			}
+		},
+		editPost: function(id, options) {
+			return $http.post('../db/db_connect.php', {'method': 'editPost', 'id': id, 'options': options}).
+			then(function(res) {
+				console.log(( res.data == 1 ? "Changes made successfully." : res.data));
+			}, function(err) {
+				console.log("Error! %o", err);
+			});
 		},
 		removePost: function() {
 

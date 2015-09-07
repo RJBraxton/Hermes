@@ -1,0 +1,17 @@
+  <div class="col-md-10">
+  	<div class="well">
+  		<p>This is the page where we'd be editing a post. Lots of first times here....</p>
+      <p>So, heads up. We need to click out of the text box for changes to apply. Either make a workaround or make a note of this. Also have to make handling for when the DB is passed these empty strings and whatnot. Maybe just recreate the notNull() we used in MMWH?</p>
+      <p><button class="btn btn-info" ng-click="edit()">Save Changes</button></p>
+      <br>      
+      <div class="panel panel-default" ng-if="post">
+        <div class="panel-heading">
+          <div class="panel-title"><input type="text" class="form-control" ng-model="post.title"></div>
+        </div>
+        <div class="panel-body">
+          <div text-angular ng-model="post.body"></div>
+          <p>Posted: {{post.postDate}}<text ng-if="post.lastEditDate">, last edited: {{post.lastEditDate}}</text></p>
+        </div>
+      </div>
+    </div>
+  </div>
