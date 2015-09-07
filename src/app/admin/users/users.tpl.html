@@ -2,7 +2,7 @@
   	<div class="well">
   		<p>This is the users page. Here we will list all of our users and can modify them.</p>
       <p>
-      <table class="table table-striped table-bordered table-responsive">
+      <table class="table table-striped table-bordered table-condensed table-responsive" ng-if="users">
         <tr>
         <td></td>
           <td><b>Username</b></td>
@@ -12,10 +12,12 @@
           <td><b>Last Login</b></td>
         </tr>
         <tr ng-repeat="user in users">
-          <td>SETTINGS</td>
-          <td>{{user.username}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.isAdmin}}</td>
+          <td><button class="btn btn-success" ng-click="edit(user.id, user)"><i class="fa fa-floppy-o fa-lg"></i>
+</button> <button class="btn btn-danger" ng-click="remove(user.id, $index)"><i class="fa fa-trash-o fa-lg"></i>
+</button></td>
+          <td><input class="form-control" type="text" ng-model="user.username"></td>
+          <td><input class="form-control" type="text" ng-model="user.email"></td>
+          <td><input type="checkbox" ng-model="user.isAdmin" ng-true-value="'1'" ng-false-value="'0'" ng-change="edit(user.id, {'isAdmin': user.isAdmin})"></td>
           <td>{{user.signupDate}}</td>
           <td>{{user.lastLogin}}</td>
         </tr>

@@ -43,7 +43,27 @@ angular.module( 'ngBoilerplate.adminUsers', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'UsersCtrl', function UsersCtrl( $scope, dbConnect ) {
+.controller( 'UsersCtrl', function UsersCtrl( $scope, dbConnect, $auth ) {
+
+$scope.dbConnect = dbConnect;
+
+$scope.edit = function(id, options) {
+  dbConnect.editUser(id, options).then(function(res) {
+
+  }, function(err) {
+
+  });
+};
+$scope.remove = function(id, index) {
+  dbConnect.removeUser(id).then(function(res) {
+    $scope.users.splice(index, 1);
+    if (id == $scope.$parent.user.id) {
+      $auth.logout();
+    }
+  }, function(err) {
+
+  });
+};
 
   dbConnect.getUsers().then(function(res) {
     $scope.users = res;

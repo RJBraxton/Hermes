@@ -24,6 +24,7 @@ if ($result) {
 		//If email and password match
 		//Now we are constructing the JWT.
 		$token = array(
+			"id" => $result->id,
 			"email" => $email,
 			"username" => $result->username,
 			"isAdmin" => ($result->isAdmin ? true : false),

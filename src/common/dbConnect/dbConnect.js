@@ -11,16 +11,26 @@ angular.module( 'dbConnect', [] )
 				console.log("Error! %o", err);
 			});
 		},
-		setUser: function() {
-
+		editUser: function(id, options) {
+			return $http.post('../db/db_connect.php', {'method': 'editUser', 'id': id, 'options': options}).
+			then(function(res) {
+				console.log(res.data);
+			}, function(err) {
+				console.log("Error! %o", err);
+			});
 		},
-		removeUser: function() {
-
+		removeUser: function(id) {
+			return $http.post('../db/db_connect.php', {'method': 'removeUser', 'id': id}).
+			then(function(res) {
+				console.log(res.data);
+			}, function(err) {
+				console.log("Error! %o", err);
+			});
 		},
 		getPosts: function() {
 
 		},
-		setPost: function() {
+		editPost: function() {
 
 		},
 		removePost: function() {
@@ -29,11 +39,11 @@ angular.module( 'dbConnect', [] )
 		getPages: function() {
 
 		},
-		setPage: function() {
+		editPage: function() {
 
 		},
 		removePage: function() {
-			
+
 		}
 	};
 
