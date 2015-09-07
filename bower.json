@@ -10,7 +10,8 @@
     "angulartics-google-analytics": "~0.1",
     "textAngular": "~1.4",
     "angular-facebook-utils": "~1.1",
-    "satellizer": "0.12"
+    "satellizer": "0.12",
+    "angular-sanitize": "~1.4"
   },
   "dependencies": {}
 }

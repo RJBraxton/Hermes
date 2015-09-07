@@ -47,7 +47,7 @@ if ($method === 'editUser' && $params['id']) {
 	
 	if ($queryOptions) {
 		if ($result = $conn->query($query)) {
-			echo var_dump($result);
+			echo ($result);
 		}
 		else {
 			http_response_code(404);
@@ -68,6 +68,22 @@ if ($method === 'removeUser' && $params['id']) {
 			http_response_code(404);
 			echo "Failed to contact the database.";
 		}
+}
+
+if ($method === 'getPosts') {
+	$query = "SELECT * from Posts";
+	if ($result = $conn->query($query)) {
+		$users = array();
+		while($row = $result->fetch_assoc())
+		{
+			array_push($users, $row);
+		}
+
+		echo json_encode($users);
+	} else {
+		http_response_code(404);
+		echo "Failed to contact the database.";
+	}
 }
 
 ?>

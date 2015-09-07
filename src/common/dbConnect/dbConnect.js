@@ -14,7 +14,7 @@ angular.module( 'dbConnect', [] )
 		editUser: function(id, options) {
 			return $http.post('../db/db_connect.php', {'method': 'editUser', 'id': id, 'options': options}).
 			then(function(res) {
-				console.log(res.data);
+				console.log(( res.data == 1 ? "Changes made successfully." : res.data));
 			}, function(err) {
 				console.log("Error! %o", err);
 			});
@@ -28,7 +28,13 @@ angular.module( 'dbConnect', [] )
 			});
 		},
 		getPosts: function() {
-
+			return $http.post('../db/db_connect.php', {'method': 'getPosts'}).
+			then(function(res) {
+				console.log(res.data);
+				return res.data;
+			}, function(err) {
+				console.log("Error! %o", err);
+			});
 		},
 		editPost: function() {
 
