@@ -1,14 +1,14 @@
 /**
  * This file/module contains all configuration for the build process.
  */
-module.exports = {
+ module.exports = {
   /**
    * The `build_dir` folder is where our projects are compiled during
    * development and the `compile_dir` folder is where our app resides once it's
    * completely built.
    */
-  build_dir: 'build',
-  compile_dir: 'bin',
+   build_dir: 'build',
+   compile_dir: 'bin',
 
   /**
    * This is a collection of file patterns that refer to our app code (the
@@ -19,7 +19,7 @@ module.exports = {
    * main HTML file, `less` is our main stylesheet, and `unit` contains our
    * app's unit tests.
    */
-  app_files: {
+   app_files: {
     js: [ 'src/**/*.js', '!src/**/*.spec.js', 'src/assets/**/*.js' ],
     jsunit: [ 'src/**/*.spec.js' ],
     
@@ -36,9 +36,9 @@ module.exports = {
   /**
    * This is a collection of files used during testing only.
    */
-  test_files: {
+   test_files: {
     js: [
-      'vendor/angular-mocks/angular-mocks.js'
+    'vendor/angular-mocks/angular-mocks.js'
     ]
   },
 
@@ -60,19 +60,19 @@ module.exports = {
    * with our app's assets. This structure is flattened, so it is not
    * recommended that you use wildcards.
    */
-  vendor_files: {
+   vendor_files: {
     js: [
-      'vendor/angular/angular.js',
-      'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
-      'vendor/angular-ui-router/release/angular-ui-router.js',
-      'vendor/angular-ui-utils/modules/route/route.js',
-      'vendor/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
-      'vendor/satellizer/satellizer.js',
-      'vendor/angular-sanitize/angular-sanitize.js',
-      'vendor/textAngular/dist/textAngular-rangy.min.js',
-      'vendor/textAngular/dist/textAngular-sanitize.min.js',  
-      'vendor/textAngular/dist/textAngular.min.js'
+    'vendor/angular/angular.js',
+    'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+    'vendor/placeholders/angular-placeholders-0.0.1-SNAPSHOT.min.js',
+    'vendor/angular-ui-router/release/angular-ui-router.js',
+    'vendor/angular-ui-utils/modules/route/route.js',
+    'vendor/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
+    'vendor/satellizer/satellizer.js',
+    'vendor/angular-sanitize/angular-sanitize.js',
+    'vendor/textAngular/dist/textAngular-rangy.min.js',
+    'vendor/textAngular/dist/textAngular-sanitize.min.js',  
+    'vendor/textAngular/dist/textAngular.min.js'
     ],
     css: [
     ],

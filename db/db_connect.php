@@ -117,8 +117,74 @@ if ($method === 'editPost' && $id) {
 	if (!is_null($options['title'])) {
 		$queryOptions .= ( $queryOptions ? ", " : '' ) . "title = " . $options['title'];
 	}
+	$queryOptions .= ", lastEditDate = '" . time("YYYY-MM-DD HH:MM:SS") . "'"; 
+
 	$query = $query . $queryOptions . " WHERE postId = " . $id;
-	
+
+	if ($queryOptions) {
+		if ($result = $conn->query($query)) {
+			echo ($result);
+		}
+		else {
+			http_response_code(404);
+			echo "Failed to contact the database.";
+		}
+	} else {
+		http_response_code(404);
+		echo "No options provided.";
+	}
+}
+
+if ($method === 'getPages') {
+	$query = "SELECT * from Pages";
+	if ($result = $conn->query($query)) {
+		$users = array();
+		while($row = $result->fetch_assoc())
+		{
+			array_push($users, $row);
+		}
+
+		echo json_encode($users);
+	} else {
+		http_response_code(404);
+		echo "Failed to contact the database.";
+	}
+}
+
+if ($method === 'getPage') {
+	$query = "SELECT * from Pages where pageId = " . $id;
+	if ($result = $conn->query($query)) {
+		$users = array();
+		while($row = $result->fetch_assoc())
+		{
+			array_push($users, $row);
+		}
+
+		echo json_encode($users);
+	} else {
+		http_response_code(404);
+		echo "Failed to contact the database.";
+	}
+}
+
+if ($method === 'editPage' && $id) {
+
+	foreach ($options as $key => $value) {
+		$options[$key] = "'$value'";
+	} 
+
+	$query = "UPDATE Pages SET ";
+	$queryOptions = "";
+	if (!is_null($options['pageBody'])) {
+		$queryOptions .= "pageBody = " . $options['pageBody'];
+	}
+	if (!is_null($options['pageTitle'])) {
+		$queryOptions .= ( $queryOptions ? ", " : '' ) . "pageTitle = " . $options['pageTitle'];
+	}
+	$queryOptions .= ", lastEditDate = '" . time("YYYY-MM-DD HH:MM:SS") . "'"; 
+
+	$query = $query . $queryOptions . " WHERE pageId = " . $id;
+
 	if ($queryOptions) {
 		if ($result = $conn->query($query)) {
 			echo ($result);

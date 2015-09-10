@@ -8,6 +8,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.adminPosts',
   'ngBoilerplate.adminEditPost',
   'ngBoilerplate.adminPages',
+  'ngBoilerplate.adminEditPage',
   'ui.router',
   'satellizer',
   'authJS',

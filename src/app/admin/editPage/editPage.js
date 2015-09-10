@@ -12,7 +12,7 @@
  * The dependencies block here is also where component dependencies should be
  * specified, as shown below.
  */
- angular.module( 'ngBoilerplate.adminEditPost', [
+ angular.module( 'ngBoilerplate.adminEditPage', [
   'ui.router',
   'plusOne',
   'ngSanitize',
@@ -25,19 +25,19 @@
  * this way makes each module more "self-contained".
  */
  .config(function config( $stateProvider ) {
-  $stateProvider.state( 'adminEditPost', {
-    url: '/admin/editPost/:postId',
+  $stateProvider.state( 'adminEditPage', {
+    url: '/admin/editPage/:pageId',
     views: {
       "main": {
-        controller: 'EditPostCtrl',
-        templateUrl: 'admin/editPost/editPost.tpl.html'
+        controller: 'editPageCtrl',
+        templateUrl: 'admin/editPage/editPage.tpl.html'
       },
       "nav": {
-        controller: 'EditPostCtrl',
+        controller: 'editPageCtrl',
         templateUrl: 'navs/adminNav.tpl.html'
       }
     },
-    data:{ pageTitle: 'Edit Post' },
+    data:{ pageTitle: 'Edit Page' },
     userOnly: true
   });
 })
@@ -45,14 +45,14 @@
 /**
  * And of course we define a controller for our route.
  */
- .controller( 'EditPostCtrl', function EditPostCtrl( $scope, $stateParams, dbConnect ) {
+ .controller( 'editPageCtrl', function editPageCtrl( $scope, $stateParams, dbConnect ) {
 
-  dbConnect.getPost($stateParams.postId).then(function(res) {
-    $scope.post = res;
+  dbConnect.getPage($stateParams.pageId).then(function(res) {
+    $scope.page = res;
   });
 
   $scope.edit = function() {
-    dbConnect.editPost($scope.post.postId, $scope.post);
+    dbConnect.editPage($scope.page.pageId, $scope.page);
     //Have something in here to update the time fields.
   };
 })

@@ -30,8 +30,7 @@ angular.module( 'dbConnect', [] )
 		getPosts: function() {
 			//Will later implement limits, etc for pagination
 			return $http.post('../db/db_connect.php', {'method': 'getPosts'}).
-			then(function(res) {
-				console.log(res.data);
+			then(function(res) {				
 				return res.data;
 			}, function(err) {
 				console.log("Error! %o", err);
@@ -58,13 +57,44 @@ angular.module( 'dbConnect', [] )
 				console.log("Error! %o", err);
 			});
 		},
+		addPost: function() {
+
+		},
 		removePost: function() {
 
 		},
 		getPages: function() {
-
+			//Will later implement limits, etc for pagination
+			return $http.post('../db/db_connect.php', {'method': 'getPages'}).
+			then(function(res) {
+				console.log(res.data);
+				return res.data;
+			}, function(err) {
+				console.log("Error! %o", err);
+			});
 		},
-		editPage: function() {
+		getPage: function(id) {
+			if (id) {
+				return $http.post('../db/db_connect.php', {'method': 'getPage', 'id': id}).
+				then(function(res) {
+					return res.data[0];
+				}, function(err) {
+					console.log("Error! %o", err);
+				});
+			}
+			else {
+				console.log("No id provided.");
+			}
+		},
+		editPage: function(id, options) {
+			return $http.post('../db/db_connect.php', {'method': 'editPage', 'id': id, 'options': options}).
+			then(function(res) {
+				console.log(( res.data == 1 ? "Changes made successfully." : res.data));
+			}, function(err) {
+				console.log("Error! %o", err);
+			});
+		},
+		addPage: function() {
 
 		},
 		removePage: function() {

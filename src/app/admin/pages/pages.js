@@ -43,7 +43,12 @@ angular.module( 'ngBoilerplate.adminPages', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'PagesCtrl', function PagesCtrl( $scope ) {
+.controller( 'PagesCtrl', function PagesCtrl( $scope, dbConnect ) {
+
+    dbConnect.getPages().then(function(res) {
+    $scope.pages = res;
+  });
+
 })
 
 ;
