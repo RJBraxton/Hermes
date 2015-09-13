@@ -3,6 +3,7 @@ angular.module( 'ngBoilerplate', [
   'templates-common',
   'ngBoilerplate.home',
   'ngBoilerplate.login',
+  'ngBoilerplate.post',
   'ngBoilerplate.adminOverview',
   'ngBoilerplate.adminUsers',
   'ngBoilerplate.adminPosts',
@@ -18,7 +19,7 @@ angular.module( 'ngBoilerplate', [
   ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $authProvider ) {
-  $urlRouterProvider.otherwise( '/home' );
+  $urlRouterProvider.otherwise( '/' );
   $authProvider.loginUrl = './Hermes/auth/authLogin.php';
   $authProvider.signupUrl = './Hermes/auth/authSignup.php';
 

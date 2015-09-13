@@ -12,7 +12,7 @@
  * The dependencies block here is also where component dependencies should be
  * specified, as shown below.
  */
-angular.module( 'ngBoilerplate.home', [
+angular.module( 'ngBoilerplate.post', [
   'ui.router',
   'plusOne'
 ])
@@ -23,15 +23,15 @@ angular.module( 'ngBoilerplate.home', [
  * this way makes each module more "self-contained".
  */
 .config(function config( $stateProvider ) {
-  $stateProvider.state( 'home', {
-    url: '/',
+  $stateProvider.state( 'post', {
+    url: '/blog/:postId',
     views: {
       "main": {
-        controller: 'HomeCtrl',
-        templateUrl: 'home/home.tpl.html'
+        controller: 'PostCtrl',
+        templateUrl: 'post/post.tpl.html'
       },
       "nav": {
-        controller: 'HomeCtrl',
+        controller: 'PostCtrl',
         templateUrl: 'navs/mainNav.tpl.html'
       }
     },
@@ -42,8 +42,10 @@ angular.module( 'ngBoilerplate.home', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'HomeCtrl', function HomeController( $scope ) {
-})
+.controller( 'PostCtrl', function PostController( $scope, $stateParams, dbConnect ) {
 
-;
+    dbConnect.getPost($stateParams.postId).then(function(res) {
+    $scope.post = res;
+  });
 
+});

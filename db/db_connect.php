@@ -63,12 +63,12 @@ if ($method === 'editUser' && $id) {
 if ($method === 'removeUser' && $id) {
 	$query = "DELETE from Users WHERE id = " . $id;
 	if ($result = $conn->query($query)) {
-			echo var_dump($result);
-		}
-		else {
-			http_response_code(404);
-			echo "Failed to contact the database.";
-		}
+		echo var_dump($result);
+	}
+	else {
+		http_response_code(404);
+		echo "Failed to contact the database.";
+	}
 }
 
 if ($method === 'getPosts') {
@@ -90,13 +90,13 @@ if ($method === 'getPosts') {
 if ($method === 'getPost') {
 	$query = "SELECT * from Posts where postId = " . $id;
 	if ($result = $conn->query($query)) {
-		$users = array();
+		$post = array();
 		while($row = $result->fetch_assoc())
 		{
-			array_push($users, $row);
+			array_push($post, $row);
 		}
 
-		echo json_encode($users);
+		echo json_encode($post);
 	} else {
 		http_response_code(404);
 		echo "Failed to contact the database.";
@@ -108,18 +108,24 @@ if ($method === 'createPost') {
 	foreach ($options as $key => $value) {
 		$options[$key] = "'$value'";
 	}
-	$submitterId = $params['submitterId'];
+	
+	$query = sprintf("INSERT INTO Posts (title,body,author, postDate, category, summary) VALUES ('%s', '%s', '%s', '%s', %b, '%s')",
+		mysql_real_escape_string(substr($options['title'], 1, -1)),
+		mysql_real_escape_string(substr($options['body'], 1, -1)),
+		$params['submitterId'], 
+		mysql_real_escape_string(date("Y-m-d H:i:s")),
+		1,
+		"summary"
+		);
 
-	$query = "INSERT INTO Posts (title,body,author, postDate, category, summary) VALUES (" . $options['title'] . "," . $options['body'] . "," . $submitterId . ",'" . date("Y-m-d H:i:s") ."', 1, 'Summary.')";
-
-		if ($result = $conn->query($query)) {
-			echo ($result);
-		}
-		else {
-			http_response_code(404);
-			echo "Failed to contact the database.";
-			echo $query;
-		}
+	if ($result = $conn->query($query)) {
+		echo ($result);
+	}
+	else {
+		http_response_code(404);
+		echo "Failed to contact the database.";
+		echo $query;
+	}
 }
 
 if ($method === 'editPost' && $id) {
@@ -128,29 +134,18 @@ if ($method === 'editPost' && $id) {
 		$options[$key] = "'$value'";
 	}
 
-	$query = "UPDATE Posts SET ";
-	$queryOptions = "";
-	if (!is_null($options['body'])) {
-		$queryOptions .= "body = " . $options['body'];
-	}
-	if (!is_null($options['title'])) {
-		$queryOptions .= ( $queryOptions ? ", " : '' ) . "title = " . $options['title'];
-	}
-	$queryOptions .= ", lastEditDate = '" . date("Y-m-d H:i:s") . "'"; 
+	$query = sprintf("UPDATE Posts SET body = '%s', title = '%s', lastEditDate = '%s' WHERE postId = $id",
+		mysql_real_escape_string(substr($options['body'], 1, -1)),
+		mysql_real_escape_string(substr($options['title'], 1, -1)),
+		mysql_real_escape_string(date("Y-m-d H:i:s"))
+		);
 
-	$query = $query . $queryOptions . " WHERE postId = " . $id;
-
-	if ($queryOptions) {
-		if ($result = $conn->query($query)) {
-			echo ($result);
-		}
-		else {
-			http_response_code(404);
-			echo "Failed to contact the database.";
-		}
-	} else {
+	if ($result = $conn->query($query)) {
+		echo ($query);
+	}
+	else {
 		http_response_code(404);
-		echo "No options provided.";
+		echo $query;
 	}
 }
 
@@ -158,13 +153,13 @@ if ($method === 'removePost') {
 
 	$query = "DELETE from Posts WHERE postId = $id;";
 
-		if ($result = $conn->query($query)) {
-			echo ($result);
-		}
-		else {
-			http_response_code(404);
-			echo "Failed to contact the database.";
-		}
+	if ($result = $conn->query($query)) {
+		echo ($result);
+	}
+	else {
+		http_response_code(404);
+		echo "Failed to contact the database.";
+	}
 }
 
 if ($method === 'getPages') {
@@ -204,17 +199,21 @@ if ($method === 'createPage') {
 	foreach ($options as $key => $value) {
 		$options[$key] = "'$value'";
 	}
-	$submitterId = $params['submitterId'];
 
-	$query = "INSERT INTO Pages (pageTitle,pageBody,pageAuthor, pageDate, lastEditDate) VALUES (" . $options['title'] . "," . $options['body'] . "," . $submitterId . ",'" . date("Y-m-d H:i:s") ."', '" . date("Y-m-d H:i:s") . "')";
+	$query = sprintf("INSERT INTO Pages (pageTitle, pageBody, pageAuthor, pageDate) VALUES ('%s', '%s', '%s', '%s')",
+		mysql_real_escape_string(substr($options['title'], 1, -1)),
+		mysql_real_escape_string(substr($options['body'], 1, -1)),
+		$params['submitterId'], 
+		mysql_real_escape_string(date("Y-m-d H:i:s"))
+		);
 
-		if ($result = $conn->query($query)) {
-			echo ($result);
-		}
-		else {
-			http_response_code(404);
-			echo "Failed to contact the database.";
-		}
+	if ($result = $conn->query($query)) {
+		echo ($result);
+	}
+	else {
+		http_response_code(404);
+		echo "Failed to contact the database.";
+	}
 }
 
 if ($method === 'editPage' && $id) {
@@ -223,17 +222,11 @@ if ($method === 'editPage' && $id) {
 		$options[$key] = "'$value'";
 	} 
 
-	$query = "UPDATE Pages SET ";
-	$queryOptions = "";
-	if (!is_null($options['pageBody'])) {
-		$queryOptions .= "pageBody = " . $options['pageBody'];
-	}
-	if (!is_null($options['pageTitle'])) {
-		$queryOptions .= ( $queryOptions ? ", " : '' ) . "pageTitle = " . $options['pageTitle'];
-	}
-	$queryOptions .= ", lastEditDate = '" . time("YYYY-MM-DD HH:MM:SS") . "'"; 
-
-	$query = $query . $queryOptions . " WHERE pageId = " . $id;
+	$query = sprintf("UPDATE Pages SET pageBody = '%s', pageTitle = '%s', lastEditDate = '%s' WHERE postId = $id",
+		mysql_real_escape_string(substr($options['pageBody'], 1, -1)),
+		mysql_real_escape_string(substr($options['pageTitle'], 1, -1)),
+		mysql_real_escape_string(date("Y-m-d H:i:s"))
+		);
 
 	if ($queryOptions) {
 		if ($result = $conn->query($query)) {
@@ -253,13 +246,13 @@ if ($method === 'removePage') {
 
 	$query = "DELETE from Pages WHERE pageId = $id;";
 
-		if ($result = $conn->query($query)) {
-			echo ($result);
-		}
-		else {
-			http_response_code(404);
-			echo "Failed to contact the database.";
-		}
+	if ($result = $conn->query($query)) {
+		echo ($result);
+	}
+	else {
+		http_response_code(404);
+		echo "Failed to contact the database.";
+	}
 }
 
 ?>
