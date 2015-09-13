@@ -1,0 +1,17 @@
+  <div class="col-md-12">
+  <h1>Create Post</h1>
+  	<div class="well">
+      <p>We could just put a "timeout" on the save function.</p>
+      <br>      
+      <div class="panel panel-default" ng-if="post">
+        <div class="panel-heading">
+          <div class="panel-title"><input type="text" class="form-control" ng-model="post.title" placeholder="Post Title"></div>
+        </div>
+        <div class="panel-body">
+          <div text-angular ng-model="post.body"></div>
+          <br>
+          <button class="btn btn-success" ng-disabled="!ready(post)" ng-click="submit()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>

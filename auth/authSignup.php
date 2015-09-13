@@ -28,7 +28,7 @@ $salt = sprintf("$2a$%02d$", $cost) . $salt;
 // Hash the password with the salt
 $hash = crypt($password, $salt);
 
-$query = "INSERT INTO Users (email, password, id, isAdmin, signupDate, salt, Username) VALUES (\"$email\", \"$hash\", null, 0, \"time('M-D-Y')\", \"$salt\", \"$username\")";
+$query = "INSERT INTO Users (email, password, id, isAdmin, signupDate, salt, Username) VALUES (\"$email\", \"$hash\", null, 0, '" . date('Y-m-d H:i:s') . "', \"$salt\", \"$username\")";
 
 $result = $conn->query($query);
 

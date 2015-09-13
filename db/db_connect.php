@@ -103,6 +103,25 @@ if ($method === 'getPost') {
 	}
 }
 
+if ($method === 'createPost') {
+
+	foreach ($options as $key => $value) {
+		$options[$key] = "'$value'";
+	}
+	$submitterId = $params['submitterId'];
+
+	$query = "INSERT INTO Posts (title,body,author, postDate, category, summary) VALUES (" . $options['title'] . "," . $options['body'] . "," . $submitterId . ",'" . date("Y-m-d H:i:s") ."', 1, 'Summary.')";
+
+		if ($result = $conn->query($query)) {
+			echo ($result);
+		}
+		else {
+			http_response_code(404);
+			echo "Failed to contact the database.";
+			echo $query;
+		}
+}
+
 if ($method === 'editPost' && $id) {
 
 	foreach ($options as $key => $value) {
@@ -117,7 +136,7 @@ if ($method === 'editPost' && $id) {
 	if (!is_null($options['title'])) {
 		$queryOptions .= ( $queryOptions ? ", " : '' ) . "title = " . $options['title'];
 	}
-	$queryOptions .= ", lastEditDate = '" . time("YYYY-MM-DD HH:MM:SS") . "'"; 
+	$queryOptions .= ", lastEditDate = '" . date("Y-m-d H:i:s") . "'"; 
 
 	$query = $query . $queryOptions . " WHERE postId = " . $id;
 
@@ -165,6 +184,24 @@ if ($method === 'getPage') {
 		http_response_code(404);
 		echo "Failed to contact the database.";
 	}
+}
+
+if ($method === 'createPage') {
+
+	foreach ($options as $key => $value) {
+		$options[$key] = "'$value'";
+	}
+	$submitterId = $params['submitterId'];
+
+	$query = "INSERT INTO Pages (pageTitle,pageBody,pageAuthor, pageDate, lastEditDate) VALUES (" . $options['title'] . "," . $options['body'] . "," . $submitterId . ",'" . date("Y-m-d H:i:s") ."', '" . date("Y-m-d H:i:s") . "')";
+
+		if ($result = $conn->query($query)) {
+			echo ($result);
+		}
+		else {
+			http_response_code(404);
+			echo "Failed to contact the database.";
+		}
 }
 
 if ($method === 'editPage' && $id) {
