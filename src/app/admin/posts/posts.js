@@ -50,7 +50,12 @@
     $scope.posts = res;
   });
 
-})
+    $scope.remove = function(pageId, index) {
+    dbConnect.removePost(pageId).then(function() {
+      $scope.posts.splice(index, 1);
+    },function() {
 
- ;
+    });
+  };
 
+});

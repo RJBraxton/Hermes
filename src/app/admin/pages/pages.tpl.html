@@ -2,16 +2,26 @@
     <div class="well">
       <p>This is the pages page. Here we will have a list of pages.</p>
       <br>
+      <p class="text-right">
+        <a ui-sref="adminCreatePage"><button class="btn btn-info">Create Page</button></a>
+      </p>
       <p>
-        <div class="panel panel-default" ng-repeat="page in pages">
-          <div class="panel-heading">
-            <a href ui-sref="adminEditPage({pageId: page.pageId})"><h3 class="panel-title">{{page.pageTitle}}</a> <small>by {{page.pageAuthor}}</small></h3>
-          </div>
-          <div class="panel-body">
-            <p ng-bind-html="page.summary"></p>
-            <p>pageed: {{page.pageDate}}<text ng-if="page.lastEditDate">, last edited: {{page.lastEditDate}}</text></p>
-          </div>
-        </div>
+        <table class="table table-striped table-bordered">
+          <tr>
+            <td>Page title</td>
+            <td>Created by</td>
+            <td>Posted on</td>
+            <td>Last edited</td>
+            <td>Options</td>
+          </tr>
+          <tr ng-repeat="page in pages">
+            <td><a ui-sref="adminEditPage({pageId: page.pageId})">{{page.pageTitle}}</a></td>
+            <td>{{page.pageAuthor}}</td>
+            <td>{{page.pageDate}}</td>
+            <td>{{page.lastEditDate}}</td>
+            <td><a ng-click="remove(page.pageId, $index)">Delete</a></td>
+          </tr>
+        </table>
       </p>
     </div>
   </div>

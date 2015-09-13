@@ -65,11 +65,13 @@ angular.module( 'dbConnect', [] )
 				console.log("Error! %o", err);
 			});
 		},
-		addPost: function() {
-
-		},
-		removePost: function() {
-
+		removePost: function(id) {
+			return $http.post('../db/db_connect.php', {'method': 'removePost', 'id': id}).
+			then(function(res) {
+				console.log(( res.data == 1 ? "Post deleted." : res.data));
+			}, function(err) {
+				console.log("Error! %o", err);
+			});
 		},
 		getPages: function() {
 			//Will later implement limits, etc for pagination
@@ -110,11 +112,13 @@ angular.module( 'dbConnect', [] )
 				console.log("Error! %o", err);
 			});
 		},
-		addPage: function() {
-
-		},
-		removePage: function() {
-
+		removePage: function(id) {
+			return $http.post('../db/db_connect.php', {'method': 'removePage', 'id': id}).
+			then(function(res) {
+				console.log(( res.data == 1 ? "Post deleted." : res.data));
+			}, function(err) {
+				console.log("Error! %o", err);
+			});
 		}
 	};
 

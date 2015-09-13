@@ -12,17 +12,17 @@
  * The dependencies block here is also where component dependencies should be
  * specified, as shown below.
  */
-angular.module( 'ngBoilerplate.adminPages', [
+ angular.module( 'ngBoilerplate.adminPages', [
   'ui.router',
   'plusOne'
-])
+  ])
 
 /**
  * Each section or module of the site can also have its own routes. AngularJS
  * will handle ensuring they are all available at run-time, but splitting it
  * this way makes each module more "self-contained".
  */
-.config(function config( $stateProvider ) {
+ .config(function config( $stateProvider ) {
   $stateProvider.state( 'adminPages', {
     url: '/admin/pages',
     views: {
@@ -43,13 +43,19 @@ angular.module( 'ngBoilerplate.adminPages', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'PagesCtrl', function PagesCtrl( $scope, dbConnect ) {
+ .controller( 'PagesCtrl', function PagesCtrl( $scope, dbConnect ) {
 
-    dbConnect.getPages().then(function(res) {
+  dbConnect.getPages().then(function(res) {
     $scope.pages = res;
   });
 
-})
+  $scope.remove = function(pageId, index) {
+    dbConnect.removePage(pageId).then(function() {
+      $scope.pages.splice(index, 1);
+    },function() {
 
-;
+    });
+  };
+
+});
 

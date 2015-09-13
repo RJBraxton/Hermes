@@ -154,6 +154,19 @@ if ($method === 'editPost' && $id) {
 	}
 }
 
+if ($method === 'removePost') {
+
+	$query = "DELETE from Posts WHERE postId = $id;";
+
+		if ($result = $conn->query($query)) {
+			echo ($result);
+		}
+		else {
+			http_response_code(404);
+			echo "Failed to contact the database.";
+		}
+}
+
 if ($method === 'getPages') {
 	$query = "SELECT * from Pages";
 	if ($result = $conn->query($query)) {
@@ -234,6 +247,19 @@ if ($method === 'editPage' && $id) {
 		http_response_code(404);
 		echo "No options provided.";
 	}
+}
+
+if ($method === 'removePage') {
+
+	$query = "DELETE from Pages WHERE pageId = $id;";
+
+		if ($result = $conn->query($query)) {
+			echo ($result);
+		}
+		else {
+			http_response_code(404);
+			echo "Failed to contact the database.";
+		}
 }
 
 ?>
