@@ -2,6 +2,7 @@
     <div class="well">
       <h1>{{post.title}} <small>by {{::post.author}}</small></h1>
       <h5>Posted on {{::post.postDate}} <small ng-if="post.lastEditDate">edited on {{::post.lastEditDate}}</small></h5>
+      <hr>
 		<p ng-bind-html="post.body"></p>
     </div>
   </div>

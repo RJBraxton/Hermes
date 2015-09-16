@@ -2,6 +2,7 @@ angular.module( 'ngBoilerplate', [
   'templates-app',
   'templates-common',
   'ngBoilerplate.home',
+  'ngBoilerplate.blog',
   'ngBoilerplate.login',
   'ngBoilerplate.post',
   'ngBoilerplate.adminOverview',

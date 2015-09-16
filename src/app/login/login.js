@@ -17,7 +17,7 @@ angular.module( 'ngBoilerplate.login', [
         templateUrl: 'navs/mainNav.tpl.html'
       }
     },
-    data:{ pageTitle: 'Login' }
+    data:{ pageTitle: 'Login/Register' }
   });
 })
 

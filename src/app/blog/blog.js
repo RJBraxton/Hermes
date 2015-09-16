@@ -12,44 +12,40 @@
  * The dependencies block here is also where component dependencies should be
  * specified, as shown below.
  */
- angular.module( 'ngBoilerplate.post', [
+angular.module( 'ngBoilerplate.blog', [
   'ui.router',
   'plusOne'
-  ])
+])
 
 /**
  * Each section or module of the site can also have its own routes. AngularJS
  * will handle ensuring they are all available at run-time, but splitting it
  * this way makes each module more "self-contained".
  */
- .config(function config( $stateProvider ) {
-  $stateProvider.state( 'post', {
-    url: '/blog/:postId',
+.config(function config( $stateProvider ) {
+  $stateProvider.state( 'blog', {
+    url: '/blog/',
     views: {
       "main": {
-        controller: 'PostCtrl',
-        templateUrl: 'post/post.tpl.html'
+        controller: 'BlogCtrl',
+        templateUrl: 'blog/blog.tpl.html'
       },
       "nav": {
-        controller: 'PostCtrl',
+        controller: 'BlogCtrl',
         templateUrl: 'navs/mainNav.tpl.html'
       }
     },
-    data:{ pageTitle: 'Post' }
+    data:{ pageTitle: 'Blog' }
   });
 })
 
 /**
  * And of course we define a controller for our route.
  */
- .controller( 'PostCtrl', function PostController( $scope, $stateParams, dbConnect, $state ) {
-
-  dbConnect.getPost($stateParams.postId).then(function(res) {
-    $scope.post = res;
-    console.log(res);
-    if (!res) {
-      $state.go('blog');
-    }
+.controller( 'BlogCtrl', function BlogCtrl( $scope, dbConnect ) {
+  dbConnect.getPosts().then(function(res) {
+    $scope.posts = res;
+  }, function(err) {
+    //Error handling?
   });
-
 });

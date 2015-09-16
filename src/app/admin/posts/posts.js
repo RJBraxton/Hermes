@@ -36,7 +36,7 @@
         templateUrl: 'navs/adminNav.tpl.html'
       }
     },
-    data:{ pageTitle: 'Overview' },
+    data:{ pageTitle: 'Posts' },
     userOnly: true
   });
 })

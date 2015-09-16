@@ -22,6 +22,8 @@ if ($result) {
 	//If the email is in the DB.
 	if ( hash_equals($result->password, crypt($password, $result->salt)) ) {
 		//If email and password match
+		//Tell the DB they logged in!
+		$conn->query("UPDATE Users SET lastLoggedIn = '" . date("Y-m-d H:i:s") . "' WHERE id = '" . $result->id . "'");
 		//Now we are constructing the JWT.
 		$token = array(
 			"id" => $result->id,

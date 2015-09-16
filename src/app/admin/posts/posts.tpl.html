@@ -21,7 +21,7 @@
             <td>{{post.author}}</td>
             <td>{{post.postDate}}</td>
             <td>{{post.lastEditDate}}</td>
-            <td><td><a ng-click="remove(post.postId, $index)">Delete</a></td></td>
+            <td><a ui-sref="post({postId: post.postId})">View</a> - <a ng-click="remove(post.postId, $index)">Delete</a></td><
           </tr>
         </table>
       </p>

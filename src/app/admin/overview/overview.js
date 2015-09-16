@@ -35,7 +35,7 @@ angular.module( 'ngBoilerplate.adminOverview', [
         templateUrl: 'navs/adminNav.tpl.html'
       }
     },
-    data:{ pageTitle: 'Overview' },
+    data:{ pageTitle: 'Blog Overview' },
     userOnly: true
   });
 })

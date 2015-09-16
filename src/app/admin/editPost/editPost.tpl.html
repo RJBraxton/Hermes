@@ -20,6 +20,13 @@
       <p>Last edited: {{post.lastEditDate}}</text></p>
       <br>
       <p>
+        <a ui-sref="post({postId: post.postId})">
+          <button class="btn btn-info">
+            View Post
+          </button>
+        </a>
+      </p>
+      <p>
         <button class="btn btn-success" ng-click="edit()">Save Changes</button>
       </p>
       <p>
