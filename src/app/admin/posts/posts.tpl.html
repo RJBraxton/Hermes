@@ -20,8 +20,8 @@
           <td><a ui-sref="adminEditPost({postId: post.postId})">{{post.title | limitTo: 15}}</a></td>
             <td>{{post.author}}</td>
             <td>{{post.postDate}}</td>
-            <td>{{post.lastEditDate}}</td>
-            <td><a ui-sref="post({postId: post.postId})">View</a> - <a ng-click="remove(post.postId, $index)">Delete</a></td><
+            <td><span ng-if="post.lastEditDate">{{post.lastEditDate}} by {{post.lastEditUser}}</span></td>
+            <td><a ui-sref="post({postId: post.postId})">View</a> - <a ng-click="remove(post.postId, $index)">Delete</a></td>
           </tr>
         </table>
       </p>

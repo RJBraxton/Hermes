@@ -6,6 +6,7 @@ $params = json_decode(file_get_contents('php://input'),true);
 $method = $params['method'];
 $options = $params['options'];
 $id = $params['id'];
+$userId = $params['userId'];
 
 if ($method === 'getUsers') {
 	$query = "SELECT email, username, id, isAdmin, signupDate FROM Users";
@@ -128,20 +129,21 @@ if ($method === 'createPost') {
 	}
 }
 
-if ($method === 'editPost' && $id) {
+if ($method === 'editPost' && $id && $userId) {
 
 	foreach ($options as $key => $value) {
 		$options[$key] = "'$value'";
 	}
 
-	$query = sprintf("UPDATE Posts SET body = '%s', title = '%s', lastEditDate = '%s' WHERE postId = $id",
+	$query = sprintf("UPDATE Posts SET body = '%s', title = '%s', lastEditDate = '%s', lastEditUser = %d WHERE postId = $id",
 		mysql_real_escape_string(substr($options['body'], 1, -1)),
 		mysql_real_escape_string(substr($options['title'], 1, -1)),
-		mysql_real_escape_string(date("Y-m-d H:i:s"))
+		mysql_real_escape_string(date("Y-m-d H:i:s")),
+		$userId
 		);
 
 	if ($result = $conn->query($query)) {
-		echo ($query);
+		echo ($result);
 	}
 	else {
 		http_response_code(404);

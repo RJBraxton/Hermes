@@ -52,7 +52,7 @@
   });
 
   $scope.edit = function() {
-    dbConnect.editPost($scope.post.postId, $scope.post);
+    dbConnect.editPost($scope.$parent.user.id, $scope.post.postId, $scope.post);
     //Have something in here to update the time fields.
   };
 })
