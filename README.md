@@ -71,6 +71,18 @@ More detail will be provided once a larger and more comprehensive structure has 
         *	pageAuthor
         *	pageDate
         *	lastEditDate
+    * Page Edits
+        *   editId
+        *   editTime
+        *   editBody
+        *   pageId
+        *   authorId
+    *   Post Edits
+        *   editId
+        *   editTime
+        *   editBody
+        *   postId
+        *   authorId
     *	Images/files
     *	Templates
     *	Users
@@ -101,15 +113,15 @@ More detail will be provided once a larger and more comprehensive structure has 
         *	Pages
             *	Edit individual page
         *	Users
-        *	Controllers
-            *	One controller for the whole website (Manage navbar, etc) Within that:
-                *	One for all of the aforementioned views
-                *	Except
-                    *	Navs, those inherit the ‘master’ scope
-        *	Factories
-            * dbConnect manages db connections. It sends all requests to dbConnect.php
-        *	Directives
-            *	Plugins could go here!
+*	Controllers
+    *	One controller for the whole website (Manage navbar, etc) Within that:
+        *	One for all of the aforementioned views
+        *	Except
+            *	Navs, those inherit the ‘master’ scope
+*	Factories
+    * dbConnect manages db connections. It sends all requests to dbConnect.php
+*	Directives
+    *	Plugins could go here!
 
 ### > Permissions
 *	Secrets folder NEEDS 770.
@@ -128,8 +140,6 @@ More detail will be provided once a larger and more comprehensive structure has 
 ### > Misc. todo:
 *	When going between pages, the navbar flickers.
     *	The collapse function on the enclosing div is to blame. What do we do about this???
-*	Future consideration: Also add a ‘who last edited’ for posts and pages, and maybe have a DB for the history of them? Maybe a separate view and page and all?
-    *	Definitely have a table for edits on posts and pages. Can tie this into a view?¬¬
 *	Is Satellizer even needed?
     *	It provides ‘linking’. What is this??
 *	Some kind of generalized error handling for all of our database communications. Something that can display an error on the screen if needed.
@@ -141,8 +151,8 @@ More detail will be provided once a larger and more comprehensive structure has 
 *	Work on a unified color scheme/plan for buttons.
 *	Custom angular filter for showing summaries and titles. If greater than a certain amount of characters, substr and add “…”
 *	Add in moment.js to get times a bit more legible.
+    *   Note - MAMP is set to Berlin time. We should consider switching to GMT, or just go with the server's time zone.
 *	Tiering for pages? childOf, etc
-*	Big thing : We could use JWTs to see how long it’s been since a person’s viewed the blog. If it hasn’t been more than ____ minutes, go with that.
 *	Dynamic titles on blog posts
 
 ### > Thoughts for the future

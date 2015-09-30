@@ -143,7 +143,19 @@ if ($method === 'editPost' && $id && $userId) {
 		);
 
 	if ($result = $conn->query($query)) {
-		echo ($result);
+		$editQuery = sprintf("INSERT INTO PostEdits (editTitle, editBody, authorId, editTime, postId) VALUES ('%s', '%s', '%s', '%s', '%s')",
+			mysql_real_escape_string(substr($options['title'], 1, -1)),
+			mysql_real_escape_string(substr($options['body'], 1, -1)),
+			$userId,
+			mysql_real_escape_string(date("Y-m-d H:i:s")),
+			$id
+			);
+		if ($result = $conn->query($editQuery)) {
+			echo ($result);
+		} else {
+			http_response_code(404);
+			echo "Failed to add the edits to the database. $editQuery";
+		}
 	}
 	else {
 		http_response_code(404);
@@ -202,7 +214,7 @@ if ($method === 'createPage') {
 		$options[$key] = "'$value'";
 	}
 
-	$query = sprintf("INSERT INTO Pages (pageTitle, pageBody, pageAuthor, pageDate) VALUES ('%s', '%s', '%s', '%s')",
+	$query = sprintf("INSERT INTO Pages (pageTitle, pageBody, authorId, editTime) VALUES ('%s', '%s', '%s', '%s')",
 		mysql_real_escape_string(substr($options['title'], 1, -1)),
 		mysql_real_escape_string(substr($options['body'], 1, -1)),
 		$params['submitterId'], 
@@ -224,23 +236,30 @@ if ($method === 'editPage' && $id) {
 		$options[$key] = "'$value'";
 	} 
 
-	$query = sprintf("UPDATE Pages SET pageBody = '%s', pageTitle = '%s', lastEditDate = '%s' WHERE postId = $id",
+	$query = sprintf("UPDATE Pages SET pageBody = '%s', pageTitle = '%s', lastEditDate = '%s' WHERE pageId = $id",
 		mysql_real_escape_string(substr($options['pageBody'], 1, -1)),
 		mysql_real_escape_string(substr($options['pageTitle'], 1, -1)),
 		mysql_real_escape_string(date("Y-m-d H:i:s"))
 		);
 
-	if ($queryOptions) {
-		if ($result = $conn->query($query)) {
+	if ($result = $conn->query($query)) {
+		$editQuery = sprintf("INSERT INTO PageEdits (editTitle, editBody, authorId, editTime, pageId) VALUES ('%s', '%s', '%s', '%s', '%s')",
+			mysql_real_escape_string(substr($options['pageTitle'], 1, -1)),
+			mysql_real_escape_string(substr($options['pageBody'], 1, -1)),
+			$params['submitterId'], 
+			mysql_real_escape_string(date("Y-m-d H:i:s")),
+			$id
+			);
+		if ($result = $conn->query($editQuery)) {
 			echo ($result);
-		}
-		else {
+		} else {
 			http_response_code(404);
-			echo "Failed to contact the database.";
+			echo "Failed to add the edits to the database. $editQuery";
 		}
-	} else {
+	}
+	else {
 		http_response_code(404);
-		echo "No options provided.";
+		echo "Failed to contact the database.";
 	}
 }
 

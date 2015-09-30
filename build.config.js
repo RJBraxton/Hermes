@@ -62,6 +62,7 @@
    */
    vendor_files: {
     js: [
+    'vendor/moment/moment.js',
     'vendor/jquery/dist/jquery.min.js',
     'vendor/angular/angular.js',
     'vendor/bootstrap/dist/js/bootstrap.min.js',

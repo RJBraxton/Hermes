@@ -104,8 +104,8 @@ angular.module( 'dbConnect', [] )
 				console.log("Error! %o", err);
 			});
 		},
-		editPage: function(id, options) {
-			return $http.post('../db/db_connect.php', {'method': 'editPage', 'id': id, 'options': options}).
+		editPage: function(submitterId, id, options) {
+			return $http.post('../db/db_connect.php', {'method': 'editPage', 'submitterId': submitterId, 'id': id, 'options': options}).
 			then(function(res) {
 				console.log(( res.data == 1 ? "Changes made successfully." : res.data));
 			}, function(err) {
