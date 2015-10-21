@@ -51,6 +51,8 @@
     $scope.page = res;
   });
 
+  $scope.moment = moment;
+
   $scope.edit = function() {
     dbConnect.editPage($scope.$parent.user.id, $scope.page.pageId, $scope.page);
     //Have something in here to update the time fields.

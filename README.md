@@ -26,10 +26,9 @@ More detail will be provided once a larger and more comprehensive structure has 
 
 ## What are our main goals?
 *	SEO capability
-    *	http://stackoverflow.com/questions/10713708/tracking-google-analytics-page-views-with-angular-js
+    *   Google analytics tracking is done via $onRouteChange
 *	Ability to add and edit data and templates from browser
-    *	Store HTML and CSS in a table?
-*	This HTML will have to contain ng-view, so how will we deal with that?
+    *	Store HTML and CSS in a table. May require some PHP magic.
 *	Users. Log in, out, deletion, and admin rights.
 *	Ability to upload images and use them in posts/pages.
 *	Blogging capabilities.
@@ -150,10 +149,10 @@ More detail will be provided once a larger and more comprehensive structure has 
 *	Sorting/ordering on posts page.
 *	Work on a unified color scheme/plan for buttons.
 *	Custom angular filter for showing summaries and titles. If greater than a certain amount of characters, substr and add “…”
-*	Add in moment.js to get times a bit more legible.
-    *   Note - MAMP is set to Berlin time. We should consider switching to GMT, or just go with the server's time zone.
+*   Note - MAMP is set to Berlin time. We should consider switching to GMT, or just go with the server's time zone.
 *	Tiering for pages? childOf, etc
 *	Dynamic titles on blog posts
+*   Hidden/Draft pages and posts.
 
 ### > Thoughts for the future
 *	Pages

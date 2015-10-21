@@ -1,9 +1,5 @@
   <div class="col-md-9">
   	<div class="well">
-      <p>So, heads up. We need to click out of the text box for changes to apply. Either make a workaround or make a note of this. Also have to make handling for when the DB is passed these empty strings and whatnot. Maybe just recreate the notNull() we used in MMWH?</p>
-      <p>We could just put a "timeout" on the save function.</p>
-      <p>{{page}}</p>
-      <br>      
       <div class="panel panel-default" ng-if="page">
         <div class="panel-heading">
           <div class="panel-title"><input type="text" class="form-control" ng-model="page.pageTitle" placeholder="page Title"></div>
@@ -17,9 +13,15 @@
 
   <div class="col-md-3">
     <div class="well">
-      <p>pageed: {{page.pageDate}}<text ng-if="page.lastEditDate"></p>
-      <p>Last edited: {{page.lastEditDate}}</text></p>
+      <p>Posted: {{moment(page.pageDate).fromNow()}}<text ng-if="page.lastEditDate"></p>
+      <p>Last edited: {{moment(page.lastEditDate).fromNow()}}</text></p>
       <br>
+      <p>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">URL text</span>
+          <input type="text" class="form-control" placeholder="Url Text" ng-model="page.snippet">
+        </div>
+      </p>
       <p>
         <button class="btn btn-success" ng-click="edit()">Save Changes</button>
       </p>

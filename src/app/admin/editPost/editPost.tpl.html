@@ -16,8 +16,8 @@
 
   <div class="col-md-3">
     <div class="well">
-      <p>Posted: {{post.postDate}}<text ng-if="post.lastEditDate"></p>
-      <p>Last edited: {{post.lastEditDate}}</text></p>
+      <p>Posted: {{moment(post.postDate).fromNow()}}<text ng-if="post.lastEditDate"></p>
+      <p>Last edited: {{moment(post.lastEditDate).fromNow()}}</text></p>
       <br>
       <p>
         <a ui-sref="post({postId: post.postId})">

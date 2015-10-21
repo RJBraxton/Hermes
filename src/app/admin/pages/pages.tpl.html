@@ -17,8 +17,8 @@
           <tr ng-repeat="page in pages">
             <td><a ui-sref="adminEditPage({pageId: page.pageId})">{{page.pageTitle}}</a></td>
             <td>{{page.pageAuthor}}</td>
-            <td>{{page.pageDate}}</td>
-            <td>{{page.lastEditDate}}</td>
+            <td>{{moment(page.pageDate).fromNow()}}</td>
+            <td>{{moment(page.lastEditDate).fromNow()}}</td>
             <td><a ng-click="remove(page.pageId, $index)">Delete</a></td>
           </tr>
         </table>

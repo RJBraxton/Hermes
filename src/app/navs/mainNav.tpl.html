@@ -27,6 +27,13 @@
         Github
       </a>
     </li>
+
+    <li ng-repeat="page in pages">
+      <a href ui-sref="page({snippet: page.url})">
+        {{page.name}}
+      </a>
+    </li>
+
   </ul>
   <ul class="nav navbar-nav navbar-right" ng-if="!auth.isAuthenticated()">
     <li ui-sref-active="active">
@@ -43,7 +50,7 @@
     </li>
     <li>
       <a href="" ng-click="logout()">
-        <i class="fa fa-comments"></i>
+        <i class="fa fa-sign-out"></i>
         Logout
       </a>
     </li>

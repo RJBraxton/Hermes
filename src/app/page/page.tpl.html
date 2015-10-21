@@ -1,0 +1,8 @@
+  <div class="col-md-8 col-md-offset-2">
+    <div class="well">
+      <h1>{{::page.pageTitle}}
+      <h5>Posted on {{::page.pageDate}} <small ng-if="post.lastEditDate">edited on {{::page.lastEditDate}}</small></h5>
+      <hr>
+		<p ng-bind-html="page.pageBody"></p>
+    </div>
+  </div>

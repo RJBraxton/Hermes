@@ -49,6 +49,8 @@
     $scope.pages = res;
   });
 
+  $scope.moment = moment;
+
   $scope.remove = function(pageId, index) {
     dbConnect.removePage(pageId).then(function() {
       $scope.pages.splice(index, 1);

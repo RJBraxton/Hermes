@@ -35,7 +35,7 @@
         templateUrl: 'navs/mainNav.tpl.html'
       }
     },
-    data:{ pageTitle: 'Post' }
+    data:{ }
   });
 })
 
@@ -45,6 +45,7 @@
  .controller( 'PostCtrl', function PostController( $scope, $stateParams, dbConnect, $state ) {
 
   dbConnect.getPost($stateParams.postId).then(function(res) {
+    $scope.$parent.pageTitle = res.title + ' | Hermes';
     $scope.post = res;
     console.log(res);
     if (!res) {

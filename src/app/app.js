@@ -5,6 +5,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.blog',
   'ngBoilerplate.login',
   'ngBoilerplate.post',
+  'ngBoilerplate.page',
   'ngBoilerplate.adminOverview',
   'ngBoilerplate.adminUsers',
   'ngBoilerplate.adminPosts',
@@ -29,26 +30,32 @@ angular.module( 'ngBoilerplate', [
 .run( function run () {
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, $state, authJS ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, $state, authJS, dbConnect ) {
 
-$scope.auth = authJS;
-if ($scope.loggedIn = authJS.isAuthenticated()) {
-  $scope.user = authJS.getPayload();
-  console.log($scope.user);
-}
+  $scope.auth = authJS;
+  if ($scope.loggedIn = authJS.isAuthenticated()) {
+    $scope.user = authJS.getPayload();
+    console.log("You are logged in as: %o", $scope.user);
+  }
 
-$scope.logout = function() {
-  authJS.logout().then(function() {
-    $scope.loggedIn = false;
-    $scope.user = null;
-  }, function() {
+  $scope.logout = function() {
+    authJS.logout().then(function() {
+      $scope.loggedIn = false;
+      $scope.user = null;
+    }, function() {
     //Logout unuccessful?
   });
-};
+  };
+
+  dbConnect.siteDetails('pages').then(function(res) {
+    $scope.pages = (JSON.parse(res).pages);
+  });
 
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | Hermes' ;
+    } else {
+      //Page titles are defined for all of our views. They'll only be dynamically changed with posts and pages.
     }
 
     // This manages redirecting for our pages that require logging in.

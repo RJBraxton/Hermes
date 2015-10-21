@@ -8,6 +8,22 @@ $options = $params['options'];
 $id = $params['id'];
 $userId = $params['userId'];
 
+if ($method === 'siteDetails') {
+	$query = "SELECT * from SiteDetails WHERE detail = '" . $params['detail'] . "'";
+	if ($result = $conn->query($query)) {
+		$results = array();
+		while($row = $result->fetch_assoc())
+		{
+			array_push($results, $row);
+		}
+
+		echo json_encode($results);
+	} else {
+		http_response_code(404);
+		echo "Failed to contact the database. $query";
+	}
+}
+
 if ($method === 'getUsers') {
 	$query = "SELECT email, username, id, isAdmin, signupDate FROM Users";
 	if ($result = $conn->query($query)) {
@@ -195,13 +211,32 @@ if ($method === 'getPages') {
 if ($method === 'getPage') {
 	$query = "SELECT * from Pages where pageId = " . $id;
 	if ($result = $conn->query($query)) {
-		$users = array();
+		$page = array();
 		while($row = $result->fetch_assoc())
 		{
-			array_push($users, $row);
+			array_push($page, $row);
 		}
 
-		echo json_encode($users);
+		echo json_encode($page);
+	} else {
+		http_response_code(404);
+		echo "Failed to contact the database.";
+	}
+}
+
+if ($method === 'viewPage') {
+		$query = sprintf("SELECT * from Pages where snippet = '%s'",
+		$params['snippet']
+		);
+
+	if ($result = $conn->query($query)) {
+		$page = array();
+		while($row = $result->fetch_assoc())
+		{
+			array_push($page, $row);
+		}
+
+		echo json_encode($page);
 	} else {
 		http_response_code(404);
 		echo "Failed to contact the database.";
@@ -214,11 +249,12 @@ if ($method === 'createPage') {
 		$options[$key] = "'$value'";
 	}
 
-	$query = sprintf("INSERT INTO Pages (pageTitle, pageBody, authorId, editTime) VALUES ('%s', '%s', '%s', '%s')",
+	$query = sprintf("INSERT INTO Pages (pageTitle, pageBody, pageAuthor, pageDate, snippet) VALUES ('%s', '%s', '%s', '%s', '%s')",
 		mysql_real_escape_string(substr($options['title'], 1, -1)),
 		mysql_real_escape_string(substr($options['body'], 1, -1)),
 		$params['submitterId'], 
-		mysql_real_escape_string(date("Y-m-d H:i:s"))
+		mysql_real_escape_string(date("Y-m-d H:i:s")),
+		mysql_real_escape_string(substr($options['snippet'], 1, -1))
 		);
 
 	if ($result = $conn->query($query)) {
@@ -236,10 +272,11 @@ if ($method === 'editPage' && $id) {
 		$options[$key] = "'$value'";
 	} 
 
-	$query = sprintf("UPDATE Pages SET pageBody = '%s', pageTitle = '%s', lastEditDate = '%s' WHERE pageId = $id",
+	$query = sprintf("UPDATE Pages SET pageBody = '%s', pageTitle = '%s', lastEditDate = '%s', snippet = '%s' WHERE pageId = $id",
 		mysql_real_escape_string(substr($options['pageBody'], 1, -1)),
 		mysql_real_escape_string(substr($options['pageTitle'], 1, -1)),
-		mysql_real_escape_string(date("Y-m-d H:i:s"))
+		mysql_real_escape_string(date("Y-m-d H:i:s")),
+		mysql_real_escape_string(substr($options['snippet'], 1, -1))
 		);
 
 	if ($result = $conn->query($query)) {

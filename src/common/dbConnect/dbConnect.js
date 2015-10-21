@@ -3,6 +3,14 @@ angular.module( 'dbConnect', [] )
 //Add documentation here when things are mostly done....
 .factory( 'dbConnect', function($http) {
 	var _factory = {
+		siteDetails: function(detail) {
+			return $http.post('../db/db_connect.php', {'method': 'siteDetails', 'detail': detail}).
+			then(function(res) {
+				return res.data[0].data;
+			}, function(err) {
+				console.log("Error! %o", err);
+			});
+		},
 		getUsers: function() {
 			return $http.post('../db/db_connect.php', {'method': 'getUsers'}).
 			then(function(res) {
@@ -77,7 +85,7 @@ angular.module( 'dbConnect', [] )
 			//Will later implement limits, etc for pagination
 			return $http.post('../db/db_connect.php', {'method': 'getPages'}).
 			then(function(res) {
-				console.log(res.data);
+				console.log(res);
 				return res.data;
 			}, function(err) {
 				console.log("Error! %o", err);
@@ -86,6 +94,19 @@ angular.module( 'dbConnect', [] )
 		getPage: function(id) {
 			if (id) {
 				return $http.post('../db/db_connect.php', {'method': 'getPage', 'id': id}).
+				then(function(res) {
+					return res.data[0];
+				}, function(err) {
+					console.log("Error! %o", err);
+				});
+			}
+			else {
+				console.log("No id provided.");
+			}
+		},
+		viewPage: function(snippet) {
+			if (snippet) {
+				return $http.post('../db/db_connect.php', {'method': 'viewPage', 'snippet': snippet}).
 				then(function(res) {
 					return res.data[0];
 				}, function(err) {

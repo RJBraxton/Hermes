@@ -48,7 +48,11 @@
 
   dbConnect.getPosts().then(function(res) {
     $scope.posts = res;
+  }, function(error) {
+
   });
+
+  $scope.moment = moment;
 
     $scope.remove = function(pageId, index) {
     dbConnect.removePost(pageId).then(function() {
